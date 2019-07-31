@@ -1,0 +1,32 @@
+#数据库配置
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://192.168.1.102:3306/superzig-android?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    #mysql 驱动
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/czc/*.xml
+  type-enums-package: com.android.hz.czc.enums
+  global-config:
+    db-config:
+      id-type: auto
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+server:
+  servlet:
+    context-path: /superzig1.0_android
+  port: 8081
+
+        
+
+
+        

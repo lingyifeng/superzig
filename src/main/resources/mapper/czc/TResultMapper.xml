@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.android.hz.czc.mapper.TResultMapper">
+
+    <select id="getResultList" resultType="java.util.Map">
+        select
+        t_result.id,
+        t_result.result,
+        picture_url,
+        picture_path,
+        t_result.name,
+        t_user.username,
+        t_tree.all_name
+        from t_result
+        inner join t_picture on t_picture.id=t_result.picture_id
+        inner join t_user on t_user.id=t_result.user_id
+        inner join t_tree on t_tree.id=tree_id
+        where 1=1
+        <if test="startTime!=null">
+            and t_result.current_date &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test="endTime!=null">
+            and t_result.current_date &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        <if test="userid!=null">
+            and user_id=#{userid,jdbcType=INTEGER}
+        </if>
+        <if test="treeIds!=null">
+            and tree_id in
+            <foreach collection="treeIds" index="index" close=")" item="item" open="(" separator=",">
+              #{item}
+            </foreach>
+
+        </if>
+    </select>
+</mapper>

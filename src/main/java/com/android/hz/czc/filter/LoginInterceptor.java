@@ -34,11 +34,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
 //        System.out.println("拦截器preHandle方法执行");
         Writer writer = response.getWriter();
+//
         response.reset();
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         HttpSession session = request.getSession(false);
         log.info("当前请求的路径是:" + request.getRequestURI());
 //        boolean needFilter = isNeedFilter(request.getRequestURI());

@@ -77,7 +77,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "edit",notes = "修改用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "userid", value = "用户名id", required = true,dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "userid", value = "用户名id", required = true,dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "alias", value = "别名", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "telephone", value = "手机号", dataType = "String", paramType = "query")

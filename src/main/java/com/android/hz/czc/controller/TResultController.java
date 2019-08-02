@@ -63,9 +63,9 @@ public class TResultController extends BaseController {
     @ApiOperation(value = "saveResult",notes = "保存结果")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file",dataType = "File",allowMultiple = true,value = "图片文件",required = true,paramType = "query"),
-            @ApiImplicitParam(name="result",value = "识别结果",required = true,paramType = "query"),
+            @ApiImplicitParam(name="result",value = "识别结果,多个结果按 '_' 下划线分隔",required = true,paramType = "query"),
             @ApiImplicitParam(name="treeId",value = "层级id",required = true,paramType = "query"),
-            @ApiImplicitParam(name="resultname",value = "结果名称",required = true,paramType = "query")
+            @ApiImplicitParam(name="resultname",value = "结果名称,多个名称按 '_' 下划线分隔",required = true,paramType = "query")
     })
     @PostMapping(value = "saveResult")
     public Result saveResult(@RequestParam("file")MultipartFile file,
@@ -77,9 +77,9 @@ public class TResultController extends BaseController {
 
     @ApiOperation(value = "getResultList",notes = "查询结果列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "currentPage",dataType = "Integer",value = "当前页",paramType = "query"),
-            @ApiImplicitParam(name="size",dataType = "Integer",value = "每页个数",paramType = "query"),
-            @ApiImplicitParam(name="userid",dataType = "Integer",value = "用户id",paramType = "query"),
+            @ApiImplicitParam(name = "currentPage",dataType = "int",value = "当前页",paramType = "query"),
+            @ApiImplicitParam(name="size",dataType = "int",value = "每页个数",paramType = "query"),
+            @ApiImplicitParam(name="userid",dataType = "int",value = "用户id",paramType = "query"),
             @ApiImplicitParam(name="startTime",value = "起始时间",dataType = "String",paramType = "query"),
             @ApiImplicitParam(name="endTime",value = "结束时间",dataType = "String",paramType = "query"),
             @ApiImplicitParam(name="treeId",value = "节点id",dataType = "Integer",paramType = "query")
@@ -96,12 +96,12 @@ public class TResultController extends BaseController {
 
     @ApiOperation(value = "getResultExcel",notes = "查询结果excel导出")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "currentPage",dataType = "Integer",value = "当前页",paramType = "query"),
-            @ApiImplicitParam(name="size",dataType = "Integer",value = "每页个数",paramType = "query"),
-            @ApiImplicitParam(name="userid",dataType = "Integer",value = "用户id",paramType = "query"),
+            @ApiImplicitParam(name = "currentPage",dataType = "int",value = "当前页",paramType = "query"),
+            @ApiImplicitParam(name="size",dataType = "int",value = "每页个数",paramType = "query"),
+            @ApiImplicitParam(name="userid",dataType = "int",value = "用户id",paramType = "query"),
             @ApiImplicitParam(name="startTime",value = "起始时间",dataType = "String",paramType = "query"),
             @ApiImplicitParam(name="endTime",value = "结束时间",dataType = "String",paramType = "query"),
-            @ApiImplicitParam(name="treeId",value = "节点id",dataType = "Integer",paramType = "query")
+            @ApiImplicitParam(name="treeId",value = "节点id",dataType = "int",paramType = "query")
     })
     @GetMapping(value = "getResultExcel")
     public Result getResultExcel(@RequestParam(value = "currentPage",defaultValue = "1")Integer currentPage,

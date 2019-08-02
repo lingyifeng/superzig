@@ -62,24 +62,28 @@ public class TResultServiceImpl extends BasicServiceImpl<TResultMapper, TResult>
         try {
             TPicture tPicture = new TPicture();
             tPicture.setName(pictureResult.get("filename"));
-            tPicture.setPicturePath(pictureResult.get("fileUrl"));
-            tPicture.setPictureUrl(pictureResult.get("filename"));
+            tPicture.setPicturePath(pictureResult.get("filepath"));
+            tPicture.setPictureUrl(pictureResult.get("fileUrl"));
             pictureMapper.insert(tPicture);
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            if (result.length() > 0) {
-                String[] split = result.split("_");
-                if (split.length > 0) {
-                    for (String s : split) {
+            if (result.length() > 0 &&resultname.length()>0) {
+                String[] results = result.split("_");
+                String[] resultnames = resultname.split("_");
+                if (results.length != resultnames.length) {
+                    return ResultFactory.buildFailResult("结果跟结果名称不对应");
+                }
+                if (results.length > 0 && resultnames.length > 0) {
+                    for (int i=0;i<results.length;i++) {
                         TResult tResult = new TResult();
                         tResult.setCurrentDate(format.format(date));
-                        tResult.setName(resultname);
+                        tResult.setName(resultnames[i]);
                         tResult.setPictureId(tPicture.getId());
                         if (treeId != null) {
                             tResult.setTreeId(treeId);
                         }
                         tResult.setUserId(userid);
-                        tResult.setResult(s);
+                        tResult.setResult(results[i]);
                         resultMapper.insert(tResult);
                     }
                 }
@@ -140,7 +144,6 @@ public class TResultServiceImpl extends BasicServiceImpl<TResultMapper, TResult>
             bos = new BufferedOutputStream(out);
             byte[] buff = new byte[2048];
             int bytesRead;
-            // Simple read/write loop.
             while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
                 bos.write(buff, 0, bytesRead);
             }
